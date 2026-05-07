@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import * as d3 from "d3"; // Only if you use d3.json, or just use fetch
+import * as d3 from "d3"; 
 
 export function NewsList() {
   const [allNews, setAllNews] = useState({});
   const [selectedTicker, setSelectedTicker] = useState("");
   const [expandedIndex, setExpandedIndex] = useState(null);
 
-  // 1. Load Data & Sync Dropdown
   useEffect(() => {
-    // Replace with your actual JSON path
     fetch("../../data/stocknews.json")
       .then((res) => res.json())
       .then((data) => setAllNews(data));
@@ -16,7 +14,7 @@ export function NewsList() {
     const select = d3.select("#bar-select");
     const updateSelection = () => {
       setSelectedTicker(select.node()?.value || "");
-      setExpandedIndex(null); // Reset expansion on ticker change
+      setExpandedIndex(null); 
     };
 
     select.on("change.news", updateSelection);

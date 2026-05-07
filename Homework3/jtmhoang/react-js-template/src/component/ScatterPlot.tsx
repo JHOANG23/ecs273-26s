@@ -2,8 +2,6 @@ import * as d3 from "d3";
 import { useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
 
-// Adjusted margins: slightly less on the right if categories are short, 
-// and enough on bottom for the X-axis label.
 const margin = { left: 60, right: 90, top: 40, bottom: 60 };
 
 async function loadTsneData() {
@@ -28,7 +26,6 @@ export function ScatterPlot() {
     };
     loadData();
 
-    // Sync with your existing global dropdown
     const select = d3.select("#bar-select");
     const updateSelection = () => setSelectedTicker(select.node()?.value || "");
     
@@ -70,7 +67,6 @@ function drawScatterPlot(svgElement, data, width, height, selectedTicker) {
   const svg = d3.select(svgElement);
   svg.selectAll("*").remove();
 
-  // 1. SCALES
   const xScale = d3.scaleLinear()
     .domain(d3.extent(data, d => d.dim1))
     .range([margin.left, width - margin.right])
@@ -84,7 +80,6 @@ function drawScatterPlot(svgElement, data, width, height, selectedTicker) {
   const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
     .domain([...new Set(data.map(d => d.category))]);
 
-  // 2. CLIP PATH
   svg.append("defs").append("clipPath")
     .attr("id", "scatter-clip")
     .append("rect")
@@ -95,7 +90,6 @@ function drawScatterPlot(svgElement, data, width, height, selectedTicker) {
 
   const chart = svg.append("g").attr("clip-path", "url(#scatter-clip)");
 
-  // 3. AXES
   const xAxis = d3.axisBottom(xScale).ticks(width / 100);
   const yAxis = d3.axisLeft(yScale).ticks(height / 80);
 
@@ -107,7 +101,6 @@ function drawScatterPlot(svgElement, data, width, height, selectedTicker) {
     .attr("transform", `translate(${margin.left}, 0)`)
     .call(yAxis);
 
-  // Axis Labels
   svg.append("text")
     .attr("x", (width - margin.right + margin.left) / 2)
     .attr("y", height - 15)
@@ -123,7 +116,6 @@ function drawScatterPlot(svgElement, data, width, height, selectedTicker) {
     .style("font-size", "12px")
     .text("t-SNE Dimension 2");
 
-  // 4. DRAW POINTS
   const dots = chart.selectAll("circle")
     .data(data)
     .join("circle")
@@ -133,10 +125,8 @@ function drawScatterPlot(svgElement, data, width, height, selectedTicker) {
     .attr("fill", d => colorScale(d.category))
     .attr("stroke", d => d.ticker === selectedTicker ? "#000" : "#fff")
     .attr("stroke-width", d => d.ticker === selectedTicker ? 2 : 0.05)
-    // Ensure the selected dot is drawn on top of others
     .sort((a, b) => (a.ticker === selectedTicker) ? 1 : -1);
 
-  // 5. SINGLE HIGHLIGHT TEXT (Requirement: Show stock name once)
   if (selectedTicker) {
     svg.append("text")
       .attr("x", margin.left + 15)
@@ -147,7 +137,6 @@ function drawScatterPlot(svgElement, data, width, height, selectedTicker) {
       .text(`Selected: ${selectedTicker}`);
   }
 
-  // 6. LEGEND
   const categories = colorScale.domain();
   const legend = svg.append("g")
     .attr("transform", `translate(${width - margin.right + 10}, ${margin.top})`);
@@ -160,7 +149,6 @@ function drawScatterPlot(svgElement, data, width, height, selectedTicker) {
       .text(cat).style("font-size", "11px").attr("alignment-baseline", "middle");
   });
 
-  // 7. ZOOM
   const zoom = d3.zoom()
     .scaleExtent([0.5, 20])
     .on("zoom", (event) => {

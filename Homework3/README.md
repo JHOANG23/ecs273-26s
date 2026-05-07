@@ -1,16 +1,17 @@
-# Homework 3 Templates
-
-This repository contains multiple templates:
-
-- `react-js-example`: A template based on React and JavaScript.
-- `react-ts-example`: A template based on React and TypeScript.
+# Homework 3 
 
 ## Usage
 
-Each template is self-contained. Navigate into a folder and install dependencies:
 
 ```bash
-cd react-example
+cd ecs273-26s/Homework3/jtmhoang/react-js-template
 npm install
 npm run dev
 ```
+
+- Right click ```http://localhost:5173/``` from the terminal to open up the dashboard. 
+
+
+## AI Usage
+
+AI was used to help implement zooming, scrolling, and scaling of axis ticker logic, as well as general data plotting assistance. 

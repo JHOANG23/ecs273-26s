@@ -1,5 +1,4 @@
 import RenderOptions from "./component/options";
-import { BarChart } from "./component/example";
 import { LineChart } from "./component/LineChart";
 import { ScatterPlot } from "./component/ScatterPlot";
 import { NewsList } from "./component/NewsList";
@@ -23,7 +22,7 @@ function App() {
         <div className="flex flex-col w-2/3">
           <div className="h-1/4 p-2">
             <h3 className="text-left text-xl">
-              View 1 to be replaced by the view title
+              Line Chart
             </h3>
             <div className="border-2 border-gray-300 rounded-xl">
               <LineChart />
@@ -31,20 +30,20 @@ function App() {
           </div>
           <div className="h-3/4 p-2">
             <h3 className="text-left text-xl h-8">
-              View 2 to be replaced by the view title
+              Scatter Plot
             </h3>
             <div className="border-2 border-gray-300 rounded-xl h-[calc(100%_-_2rem)]">
-              <p className="text-center text-gray-500 mt-20">Empty View 2</p>
+              {/* <p className="text-center text-gray-500 mt-20">Empty View 2</p> */}
               <ScatterPlot />
             </div>
           </div>
         </div>
         <div className="w-1/3 h-full p-2">
           <h3 className="text-left text-xl h-8">
-            View 3 to be replaced by the view title
+            News List
           </h3>
           <div className="border-2 border-gray-300 rounded-xl h-[calc(100%-2rem)]">
-            <p className="text-center text-gray-500 mt-20">Empty View 3</p>
+            {/* <p className="text-center text-gray-500 mt-20">Empty View 3</p> */}
             <NewsList />
           </div>
         </div>
