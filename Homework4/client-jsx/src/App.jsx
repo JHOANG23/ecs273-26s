@@ -35,13 +35,8 @@ export default function App() {
         </label>
       </header>
 
-      {/* MAIN LAYOUT */}
       <div className="flex flex-row h-full w-full">
-
-        {/* LEFT SIDE (CHARTS) */}
         <div className="flex flex-col w-2/3 h-full">
-
-          {/* LINE CHART */}
           <div className="h-[40%] p-2 flex flex-col">
             <h3 className="text-left text-xl shrink-0">
               Stock Price Overview
@@ -51,8 +46,6 @@ export default function App() {
               <LineChart ticker={selectedTicker} />
             </div>
           </div>
-
-          {/* SCATTER PLOT */}
           <div className="h-[60%] p-2 flex flex-col">
             <h3 className="text-left text-xl shrink-0">
               t-SNE Visualization
@@ -64,8 +57,6 @@ export default function App() {
           </div>
 
         </div>
-
-        {/* RIGHT SIDE (NEWS) */}
         <div className="w-1/3 h-full p-2 flex flex-col">
 
           <h3 className="text-left text-xl shrink-0">
